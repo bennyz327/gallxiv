@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: gallexiv
+  datasource:
+    url: jdbc:postgresql://localhost:5432/gallexiv
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 100MB
+
+jwt_secret: FPeXwBKV4gjqcRcCY5w5cevcQosGB6j8RTFIFXjSV84=
