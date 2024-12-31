@@ -9,10 +9,20 @@ const goToPostPage = (postId: string) => {
   router.push(`/post/${postId}`)
 }
 
-const posts = ref<any[]>([])
+export type Post = {
+  id: string
+  title: string
+  images: {
+    id: string
+  }[]
+  user: {
+    account: string
+  }
+}
+const posts = ref<Post[]>([])
 
 onMounted(async () => {
-  posts.value = (await axios.get('/posts')).data
+  posts.value = (await axios.get<Post[]>('/api/posts')).data
 })
 </script>
 

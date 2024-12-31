@@ -1,0 +1,1 @@
+npx react-query-swagger /vue /input:http://localhost:8080/v3/api-docs /output:src/api/axios-client.ts /template:Axios /serviceHost:. /use-recommended-configuration
