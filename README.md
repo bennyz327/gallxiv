@@ -1,5 +1,7 @@
 # Project Gallxiv
 
+[English](README.md) | [中文](README_zh.md)
+
 ## Overview
 
 Gallxiv is a full-stack web application developed with Spring Boot (backend) and Vue 3 (frontend). It is designed to handle functionalities such as user authentication, post management, and media handling. The project is modular and containerized for ease of deployment.
