@@ -11,4 +11,7 @@ class Image(
 
     @Column(name = "original_filename")
     val originalFilename: String? = null,
+
+    @Column(name = "original_extension")
+    val originalExtension: String? = null,
 )

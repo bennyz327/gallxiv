@@ -30,4 +30,10 @@ class Post(
         inverseJoinColumns = [JoinColumn(name = "image_id", referencedColumnName = "id")]
     )
     val images: Set<Image>? = null,
+
+    @Column(name = "is_public")
+    val isPublic: Boolean = false,
+
+    @Column(name = "is_sensitive")
+    val isSensitive: Boolean = false,
 )
