@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import {useRouter} from "vue-router"
-import {onMounted, ref} from "vue"
-import axios from "axios";
+import {useGetPosts} from "@/api/generated";
 
 const router = useRouter()
 
@@ -9,21 +8,7 @@ const goToPostPage = (postId: string) => {
   router.push(`/post/${postId}`)
 }
 
-export type Post = {
-  id: string
-  title: string
-  images: {
-    id: string
-  }[]
-  user: {
-    account: string
-  }
-}
-const posts = ref<Post[]>([])
-
-onMounted(async () => {
-  posts.value = (await axios.get<Post[]>('/api/posts')).data
-})
+const {data: posts} = useGetPosts()
 </script>
 
 <template>
@@ -35,11 +20,11 @@ onMounted(async () => {
         <h1>貼文列表</h1>
       </v-col>
     </v-row>
-    <v-row v-if="posts.length > 0">
+    <v-row v-if="posts && posts.length > 0">
       <v-col v-for="post in posts" cols="12" md="12" :key="post.id">
-        <v-card @click="goToPostPage(post.id)">
+        <v-card @click="goToPostPage(post.id!)">
           <v-card-title>{{ post.title }}</v-card-title>
-          <v-card-text>作者: {{ post.user.account }}</v-card-text>
+          <v-card-text>作者: {{ post.user!.account }}</v-card-text>
         </v-card>
       </v-col>
     </v-row>

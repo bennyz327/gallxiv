@@ -1,0 +1,1 @@
+{"type":"object","properties":{"id":{"type":"string","format":"uuid"},"account":{"type":"string"},"email":{"type":"string"},"username":{"type":"string"},"password":{"type":"string"},"role":{"type":"string","enum":["ADMIN","USER"]}},"required":["role"],"x-readme-ref-name":"User"}

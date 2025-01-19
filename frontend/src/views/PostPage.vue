@@ -2,17 +2,12 @@
 import {useRoute, useRouter} from "vue-router";
 import {onMounted, watch} from "vue";
 import Image from "@/components/Image.vue";
-import * as AxiosQuery from "@/api/axios-client.ts"
+import {useGetPost} from "@/api/generated";
 
 const route = useRoute()
 const router = useRouter()
 
-const {
-  data: postDetails,
-  isPending,
-  error,
-  isError
-} = AxiosQuery.Query.useGetPostQuery('admin', route.params.id as string)
+const {data: postDetails, isPending, isError, error} = useGetPost('admin', route.params.id as string)
 
 watch(() => isError.value, (newVal) => {
   if (newVal) {
