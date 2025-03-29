@@ -3,7 +3,6 @@ import { useRoute, useRouter } from "vue-router";
 import { onMounted, watch } from "vue";
 import Image from "@/components/Image.vue";
 import { useGetPost } from "@/api/generated";
-import { useUserStore } from "@/stores/user";
 import AppBar from "@/components/layout/AppBar.vue";
 
 const route = useRoute();

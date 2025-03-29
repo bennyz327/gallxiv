@@ -40,7 +40,7 @@ class MediaController(
             val belongsToPosts = imageInfo.refPosts
             if (belongsToPosts.isNullOrEmpty()) {
                 println("Not Allowed to access image (No post found)")
-                return null;
+                return null
             }
             val belongPost = belongsToPosts.filter { post -> post.id == UUID.fromString(postId) }
             if (belongPost.isEmpty() || belongPost.size != 1) {
