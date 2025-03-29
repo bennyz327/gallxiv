@@ -1,3 +1,5 @@
+import type { Post } from './Post.ts'
+
 export type Image = {
   /**
    * @type string | undefined
@@ -11,4 +13,8 @@ export type Image = {
    * @type string | undefined
    */
   originalExtension?: string
+  /**
+   * @type array | undefined
+   */
+  refPosts?: Post[]
 }

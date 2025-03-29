@@ -34,6 +34,10 @@ class SecurityConfig(private val jwtFilter: JwtFilter) {
             .authorizeHttpRequests { authorizationManagerRequestMatcherRegistry ->
                 authorizationManagerRequestMatcherRegistry
                     .requestMatchers("/api/auth/login").permitAll()
+                    .requestMatchers("/api/auth/register").permitAll()
+                    .requestMatchers("/api/posts").permitAll()
+                    .requestMatchers("/api/user/*/post/*").permitAll()
+                    .requestMatchers("/api/image/*/*").permitAll()
                     .requestMatchers("/api/**").authenticated()
                     .anyRequest().permitAll()
             }

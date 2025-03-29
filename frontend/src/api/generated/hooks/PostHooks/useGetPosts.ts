@@ -1,7 +1,7 @@
 import client from '@/api/app-axios'
+import type { GetPostsQueryResponse } from '../../types/GetPosts.ts'
 import type { RequestConfig, ResponseErrorConfig } from '@/api/app-axios'
 import type { QueryKey, QueryObserverOptions, UseQueryReturnType } from '@tanstack/vue-query'
-import type { GetPostsQueryResponse } from '../../types/GetPosts.ts'
 import { queryOptions, useQuery } from '@tanstack/vue-query'
 import { unref } from 'vue'
 

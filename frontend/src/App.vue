@@ -8,8 +8,14 @@ import {VueQueryDevtools} from "@tanstack/vue-query-devtools";
 const userStore = useUserStore()
 
 onMounted(async () => {
-  await userStore.init()
-  toast(`已使用 ${userStore.user?.username} 登入`)
+  try {
+    await userStore.init()
+    if (userStore.isLoggedIn && userStore.user?.username) {
+      toast(`已使用 ${userStore.user.username} 登入`)
+    }
+  } catch (error) {
+    console.error("Failed to initialize user:", error)
+  }
 })
 </script>
 

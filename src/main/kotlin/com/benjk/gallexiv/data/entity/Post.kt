@@ -1,5 +1,6 @@
 package com.benjk.gallexiv.data.entity
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import jakarta.persistence.*
 import java.util.*
 
@@ -29,6 +30,7 @@ class Post(
         joinColumns = [JoinColumn(name = "post_id", referencedColumnName = "id")],
         inverseJoinColumns = [JoinColumn(name = "image_id", referencedColumnName = "id")]
     )
+    @JsonIgnoreProperties("refPosts")
     val images: Set<Image>? = null,
 
     @Column(name = "is_public")

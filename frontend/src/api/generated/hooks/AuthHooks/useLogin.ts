@@ -1,7 +1,7 @@
 import client from '@/api/app-axios'
+import type { LoginMutationRequest, LoginMutationResponse } from '../../types/Login.ts'
 import type { RequestConfig, ResponseErrorConfig } from '@/api/app-axios'
 import type { MutationObserverOptions } from '@tanstack/vue-query'
-import type { LoginMutationRequest, LoginMutationResponse } from '../../types/Login.ts'
 import type { MaybeRef } from 'vue'
 import { useMutation } from '@tanstack/vue-query'
 

@@ -2,6 +2,10 @@ export type GetImagePathParams = {
   /**
    * @type string
    */
+  postId: string
+  /**
+   * @type string
+   */
   id: string
 }
 

@@ -4,11 +4,15 @@ export type UserPostMetadataRequest = {
    */
   title: string
   /**
-   * @type string
+   * @type string | undefined
    */
-  description: string
+  description?: string
   /**
-   * @type string
+   * @type string | undefined
    */
-  tags: string
+  tags?: string
+  /**
+   * @type boolean | undefined
+   */
+  isPublic?: boolean
 }

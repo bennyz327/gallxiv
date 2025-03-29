@@ -1,5 +1,5 @@
 import client from '@/api/app-axios'
-import type { UserPostMutationRequest, UserPostMutationResponse } from '../../types/UserPost.ts'
+import type { UserPostMutationRequest, UserPostMutationResponse } from '@/api/generated/types/UserPost'
 import type { RequestConfig, ResponseErrorConfig } from '@/api/app-axios'
 import type { MutationObserverOptions } from '@tanstack/vue-query'
 import type { MaybeRef } from 'vue'
@@ -11,17 +11,26 @@ export type UserPostMutationKey = ReturnType<typeof userPostMutationKey>
 
 /**
  * {@link /api/user/post}
+ * 修正版本: 正確處理 metadata 和圖片上傳
  */
 async function userPost(data: UserPostMutationRequest, config: Partial<RequestConfig<UserPostMutationRequest>> = {}) {
   const formData = new FormData()
   if (data) {
-    Object.keys(data).forEach((key) => {
-      const value = data[key as keyof typeof data]
-      if (typeof key === 'string' && (typeof value === 'string' || value instanceof Blob)) {
-        formData.append(key, value)
-      }
-    })
+    // 處理 metadata - 轉換為 JSON 並作為 Blob 添加
+    if (data.metadata) {
+      formData.append('metadata', new Blob([JSON.stringify(data.metadata)], {
+        type: 'application/json'
+      }));
+    }
+    
+    // 處理圖片數組 - 逐一添加每張圖片
+    if (data.images && Array.isArray(data.images)) {
+      data.images.forEach(image => {
+        formData.append('images', image);
+      });
+    }
   }
+
   const res = await client<UserPostMutationResponse, ResponseErrorConfig<Error>, UserPostMutationRequest>({
     method: 'POST',
     url: `/api/user/post`,
@@ -34,6 +43,7 @@ async function userPost(data: UserPostMutationRequest, config: Partial<RequestCo
 
 /**
  * {@link /api/user/post}
+ * 修正版本的 useUserPost Hook，可以正確處理表單數據
  */
 export function useUserPost(
   options: {

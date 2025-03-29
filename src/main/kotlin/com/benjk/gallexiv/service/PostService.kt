@@ -30,11 +30,11 @@ class PostService(private val postRepository: PostRepository) {
             title = metadata.title,
             description = metadata.description,
             tags = metadata.tags,
+            isPublic = metadata.isPublic!!,
             images = savedImageSet,
             user = existUser,
         )
-        postRepository.save(post)
-        return post.id!!
+        return postRepository.save(post).id ?: throw ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Failed to create post")
     }
 
     /**

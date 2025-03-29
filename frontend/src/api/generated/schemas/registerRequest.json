@@ -1,0 +1,1 @@
+{"type":"object","properties":{"account":{"type":"string"},"email":{"type":"string"},"username":{"type":"string"},"password":{"type":"string"}},"required":["account","email","password","username"],"x-readme-ref-name":"RegisterRequest"}
