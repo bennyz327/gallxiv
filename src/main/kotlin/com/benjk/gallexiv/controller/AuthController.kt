@@ -1,6 +1,7 @@
 package com.benjk.gallexiv.controller
 
 import com.benjk.gallexiv.config.JwtUtil
+import com.benjk.gallexiv.data.dto.ChangePasswordRequest
 import com.benjk.gallexiv.data.dto.LoginRequest
 import com.benjk.gallexiv.data.dto.RegisterRequest
 import com.benjk.gallexiv.data.entity.User
@@ -75,6 +76,16 @@ class AuthController(
             path = "/"
         }
         response.addCookie(tokenCookie)
+    }
+
+    /**
+     * 修改用戶密碼
+     * 只有登入的用戶才能修改自己的密碼
+     */
+    @PostMapping("/auth/change-password")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    fun changePassword(@AuthenticationPrincipal user: User, @RequestBody request: ChangePasswordRequest) {
+        userService.changePassword(user, request)
     }
 
     /**

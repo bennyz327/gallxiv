@@ -1,6 +1,7 @@
 package com.benjk.gallexiv.service
 
 import com.benjk.gallexiv.data.UserRole
+import com.benjk.gallexiv.data.dto.ChangePasswordRequest
 import com.benjk.gallexiv.data.dto.RegisterRequest
 import com.benjk.gallexiv.data.entity.User
 import com.benjk.gallexiv.repository.UserRepository
@@ -60,5 +61,30 @@ class UserService(
         
         // 儲存使用者並返回 ID
         return userRepository.save(user).id ?: throw ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Failed to create user")
+    }
+
+    /**
+     * 更改用戶密碼
+     * 驗證當前密碼並更新為新密碼
+     *
+     * @param user 當前用戶
+     * @param request 密碼修改請求
+     * @throws ResponseStatusException 若當前密碼不正確
+     */
+    @Transactional
+    fun changePassword(user: User, request: ChangePasswordRequest) {
+        // 驗證當前密碼
+        if (!passwordEncoder.matches(request.currentPassword, user.password)) {
+            throw ResponseStatusException(HttpStatus.UNAUTHORIZED, "Current password is incorrect")
+        }
+        
+        // 檢查新密碼是否與當前密碼相同
+        if (passwordEncoder.matches(request.newPassword, user.password)) {
+            throw ResponseStatusException(HttpStatus.BAD_REQUEST, "New password must be different from current password")
+        }
+        
+        // 更新密碼
+        user.password = passwordEncoder.encode(request.newPassword)
+        userRepository.save(user)
     }
 }

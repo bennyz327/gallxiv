@@ -106,8 +106,16 @@ const goToHome = () => {
                   color="secondary"
                   variant="tonal"
                   size="small"
+                  @click="router.push('/register')"
+                  class="mr-2"
+                >
+                  註冊新帳號
+                </v-btn>
+                <v-btn
+                  color="secondary"
+                  variant="tonal"
+                  size="small"
                   @click="goToHome"
-                  block
                 >
                   返回首頁
                 </v-btn>

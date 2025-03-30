@@ -34,6 +34,10 @@ const goToCreatePost = () => {
   router.push('/create-post');
 };
 
+const goToChangePassword = () => {
+  router.push('/change-password');
+};
+
 const handleLogout = async () => {
   try {
     logoutLoading.value = true;
@@ -70,6 +74,15 @@ const handleLogout = async () => {
           發佈新貼文
         </v-btn>
         <v-badge v-if="userStore.isAdmin" color="error" content="管理員" class="me-4"></v-badge>
+        <v-btn
+          color="primary"
+          variant="tonal"
+          prepend-icon="mdi-key"
+          class="me-4"
+          @click="goToChangePassword"
+        >
+          修改密碼
+        </v-btn>
         <v-btn
           color="error"
           variant="tonal"
