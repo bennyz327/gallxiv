@@ -4,9 +4,11 @@ import com.benjk.gallexiv.config.JwtUtil
 import com.benjk.gallexiv.data.dto.ChangePasswordRequest
 import com.benjk.gallexiv.data.dto.LoginRequest
 import com.benjk.gallexiv.data.dto.RegisterRequest
+import com.benjk.gallexiv.data.dto.UpdateUserRequest
 import com.benjk.gallexiv.data.entity.User
 import com.benjk.gallexiv.service.UserService
 import io.swagger.v3.oas.annotations.tags.Tag
+import jakarta.validation.Valid
 import jakarta.servlet.http.Cookie
 import jakarta.servlet.http.HttpServletResponse
 import org.springframework.http.HttpStatus
@@ -93,4 +95,12 @@ class AuthController(
      */
     @GetMapping("/me")
     fun me(@AuthenticationPrincipal user: User) = user
+
+    /**
+     * 更新使用者資訊
+     */
+    @PatchMapping("/me")
+    fun updateMe(@AuthenticationPrincipal user: User, @RequestBody @Valid request: UpdateUserRequest) {
+        userService.updateUser(user, request)
+    }
 }

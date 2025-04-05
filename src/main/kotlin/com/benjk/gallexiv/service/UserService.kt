@@ -3,6 +3,7 @@ package com.benjk.gallexiv.service
 import com.benjk.gallexiv.data.UserRole
 import com.benjk.gallexiv.data.dto.ChangePasswordRequest
 import com.benjk.gallexiv.data.dto.RegisterRequest
+import com.benjk.gallexiv.data.dto.UpdateUserRequest
 import com.benjk.gallexiv.data.entity.User
 import com.benjk.gallexiv.repository.UserRepository
 import org.springframework.http.HttpStatus
@@ -85,6 +86,19 @@ class UserService(
         
         // 更新密碼
         user.password = passwordEncoder.encode(request.newPassword)
+        userRepository.save(user)
+    }
+
+    /**
+     * 更新使用者資訊
+     *
+     * @param user 當前用戶
+     * @param request 更新使用者資訊請求
+     * @throws ResponseStatusException 若使用者不存在
+     */
+    @Transactional
+    fun updateUser(user: User, request: UpdateUserRequest) {
+        user.username = request.username
         userRepository.save(user)
     }
 }

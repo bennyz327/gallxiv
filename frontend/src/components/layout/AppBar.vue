@@ -34,10 +34,6 @@ const goToCreatePost = () => {
   router.push('/create-post');
 };
 
-const goToChangePassword = () => {
-  router.push('/change-password');
-};
-
 const handleLogout = async () => {
   try {
     logoutLoading.value = true;
@@ -77,11 +73,11 @@ const handleLogout = async () => {
         <v-btn
           color="primary"
           variant="tonal"
-          prepend-icon="mdi-key"
+          prepend-icon="mdi-cog"
           class="me-4"
-          @click="goToChangePassword"
+          @click="router.push('/settings')"
         >
-          修改密碼
+          設定
         </v-btn>
         <v-btn
           color="error"
